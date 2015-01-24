@@ -1,2 +1,2 @@
 # doublelist
-A fast-lookup doubly-linked list implementation for nodejs.
+A fast-lookup key-value doubly-linked list implementation for nodejs.

@@ -1,0 +1,30 @@
+{
+  "name": "doublelist",
+  "version": "0.0.0",
+  "description": "A fast-lookup key-value doubly-linked list implementation for nodejs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jarekwg/doublelist.git"
+  },
+  "keywords": [
+    "doublelist",
+    "linkedlist",
+    "linked",
+    "list",
+    "queue",
+    "stack",
+    "map"
+  ],
+  "devDependencies": {
+    "tap": "~0.4.0"
+  },
+  "author": "Jarek Glowacki <jarekwg@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jarekwg/doublelist/issues"
+  }
+}
