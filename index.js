@@ -20,7 +20,7 @@
 
 module.exports = DoubleList
 
-// The DoubleList constructor.
+// Constructor.
 function DoubleList() {
     this.index = {}
     this.head = null
@@ -28,7 +28,7 @@ function DoubleList() {
     this.length = 0
 }
 
-// Generic node construct.
+// Generic node object.
 function Node(key, value) {
     this.next = null
     this.prev = null
@@ -36,7 +36,7 @@ function Node(key, value) {
     this.value = value
 }
 
-// Adds a new key-value pair at the end of the list.
+// Adds an element at the end of the list.
 DoubleList.prototype.add = function(key, value) {
     if (this.index.hasOwnProperty(key)) throw new Error('Key ' + key + ' already exists! Key must be unique.')
     var node = new Node(key, value)
@@ -53,7 +53,7 @@ DoubleList.prototype.add = function(key, value) {
 DoubleList.prototype.append = DoubleList.prototype.add
 DoubleList.prototype.enqueue = DoubleList.prototype.add
 
-// Adds a new key-value pair at the beginning of the list.
+// Adds an element at the beginning of the list.
 DoubleList.prototype.push = function(key, value) {
     if (this.index.hasOwnProperty(key)) throw new Error('Key ' + key + ' already exists! Key must be unique.')
     var node = new Node(key, value)
@@ -68,7 +68,7 @@ DoubleList.prototype.push = function(key, value) {
     this.length++
 }
 
-// Adds a new key-value pair after the specified key in the list.
+// Adds an element after the element with key <insertkey>.
 DoubleList.prototype.insert = function(insertkey, key, value) {
     if (!this.index.hasOwnProperty(insertkey)) throw new Error('Key ' + key + ' does not exist!')
     if (this.index.hasOwnProperty(key)) throw new Error('Key ' + key + ' already exists! Key must be unique.')
@@ -86,7 +86,7 @@ DoubleList.prototype.insert = function(insertkey, key, value) {
     this.length++
 }
 
-// Removes an element from the start of the list. Returns the key-value pair that was removed.
+// Removes and returns the element at the beginning of the list, in the form [key, value].
 DoubleList.prototype.pop = function() {
 	if (this.length === 0) throw new Error('Cannot remove from an empty list!')
     var node = this.head
@@ -98,11 +98,11 @@ DoubleList.prototype.pop = function() {
     }
 	this.head = node.next
     this.length--
-    return (node.key, node.value)
+    return [node.key, node.value]
 }
 DoubleList.prototype.dequeue = DoubleList.prototype.pop
 
-// Removes an element from the list as specified by the key. Returns the corresponding value of the removed element.
+// Removes and returns the value of the element with key <key>.
 DoubleList.prototype.remove = function(key) {
     if (!this.index.hasOwnProperty(key)) throw new Error('Key ' + key + ' does not exist!')
     var node = this.index[key]
@@ -127,7 +127,7 @@ DoubleList.prototype.remove = function(key) {
 }
 
 
-// Clears the list.
+// Clears the list, removing all elements.
 DoubleList.prototype.clear = function() {
     var node = this.head
     var i = this.length
@@ -145,21 +145,21 @@ DoubleList.prototype.clear = function() {
 DoubleList.prototype.flush = DoubleList.prototype.clear
 DoubleList.prototype.empty = DoubleList.prototype.clear
 
-// Returns the value held by the node at the specified key.
+// Returns the value of the element with key <key>.
 DoubleList.prototype.get = function(key) {
     if (!this.index.hasOwnProperty(key)) throw new Error('Key ' + key + ' does not exist!')
     return this.index[key].value
 }
 DoubleList.prototype.find = DoubleList.prototype.get
 
-// Sets the value at the specified key to the new value.
+// Assigns the value <value> to the element with key <key>.
 DoubleList.prototype.set = function(key, value) {
     if (!this.index.hasOwnProperty(key)) throw new Error('Key ' + key + ' does not exist!')
     this.index[key].value = value
 }
 DoubleList.prototype.update = DoubleList.prototype.set
 
-// Returns whether or not the specified key exists.
+// Returns whether or not the key <key> exists.
 DoubleList.prototype.hasKey = function(key) {
     return this.index.hasOwnProperty(key)
 }
@@ -175,4 +175,32 @@ DoubleList.prototype.foreach = function(callback) {
         callback(node.key, node.value)
         node = node.next
     }
+}
+
+// Returns an array representation of this list.
+//  Each array element is assigned a key-value pair from the list.
+DoubleList.prototype.toArray = function() {
+    var arr = []
+    var node = this.head
+    var i = this.length
+
+    while (i--) {
+        arr[arr.length] = [node.key, node.value]
+        node = node.next
+    }
+    return arr
+}
+
+// Returns a dictionary representation of this list.
+//  The returned object is assigned keys from the list, which point to the corresponding values.
+DoubleList.prototype.toDict = function() {
+    var dict = []
+    var node = this.head
+    var i = this.length
+
+    while (i--) {
+        dict[node.key] = node.value
+        node = node.next
+    }
+    return dict
 }
