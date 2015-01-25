@@ -1,8 +1,6 @@
 var test = require('tap').test
 var doublelist = require('../')
 
-// TODO: Finish writing these tests..
-
 test('list', function (t) {
     var d = new doublelist()
     t.equal(d.length, 0, "new list should be empty")
