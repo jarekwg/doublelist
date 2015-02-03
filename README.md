@@ -2,8 +2,6 @@
 [![npm version](https://badge.fury.io/js/doublelist.svg)](http://badge.fury.io/js/doublelist)
 ![Downloads](http://img.shields.io/npm/dm/doublelist.svg?style=flat)
 
-A fast-lookup key-value doubly-linked list implementation for nodejs.
-
 ## Installation
 
     npm install doublelist
